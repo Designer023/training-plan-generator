@@ -1,0 +1,86 @@
+@import "~bootstrap/scss/functions";
+// Overrides here!
+@import "variables";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+// @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700');
+@import url('https://fonts.googleapis.com/css?family=Heebo&display=swap');
+
+
+html, body, #___gatsby, #___gatsby > div {
+  height: 100%;
+  min-height: 100%;
+}
+
+.page {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+}
+
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/images";
+@import "~bootstrap/scss/code";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/tables";
+@import "~bootstrap/scss/forms";
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/transitions";
+@import "~bootstrap/scss/dropdown";
+@import "~bootstrap/scss/button-group";
+@import "~bootstrap/scss/input-group";
+@import "~bootstrap/scss/custom-forms";
+@import "~bootstrap/scss/nav";
+@import "~bootstrap/scss/navbar";
+@import "~bootstrap/scss/card";
+@import "~bootstrap/scss/breadcrumb";
+@import "~bootstrap/scss/pagination";
+@import "~bootstrap/scss/badge";
+@import "~bootstrap/scss/jumbotron";
+@import "~bootstrap/scss/alert";
+@import "~bootstrap/scss/progress";
+@import "~bootstrap/scss/media";
+@import "~bootstrap/scss/list-group";
+@import "~bootstrap/scss/close";
+@import "~bootstrap/scss/toasts";
+@import "~bootstrap/scss/modal";
+@import "~bootstrap/scss/tooltip";
+@import "~bootstrap/scss/popover";
+@import "~bootstrap/scss/carousel";
+@import "~bootstrap/scss/spinners";
+@import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/print";
+
+
+// .navbar-toggler-text {
+
+//   display: inline-flex;
+//   height: 1.5em;
+//   vertical-align: middle;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+// pre {
+//   background: #f1f1f1;
+//   padding: 1em;
+// }
+
+// .grad-text,
+// h1, h2, h3,
+// .h1, .h2, .h3
+// {
+//   background: -webkit-linear-gradient(0deg,$primary,$secondary);
+//   -webkit-background-clip: text;
+//   -webkit-text-fill-color: transparent;
+// }
+
+// .bg-gradient {
+//   background: $primary; /* fallback for old browsers */
+//   background: -webkit-linear-gradient(to right, $primary, $secondary); /* Chrome 10-25, Safari 5.1-6 */
+//   background: linear-gradient(to right, $primary, $secondary); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+// }
