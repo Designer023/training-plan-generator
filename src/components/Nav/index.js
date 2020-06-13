@@ -1,16 +1,12 @@
 import React from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 
-import {} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import { authorize } from "../../redux/actions";
-
-const Nav = ({ auth, actions }) => {
+const Nav = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <a className="navbar-brand" href="/">
-        Plan generator
+        Training plan generator
       </a>
       <button
         className="navbar-toggler"
@@ -25,52 +21,15 @@ const Nav = ({ auth, actions }) => {
       </button>
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav">
-          {/* <Fragment>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/athlete">
-                                    Athlete
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/stats">
-                                    Stats
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/activities">
-                                    Activities
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/graphs">
-                                    Graphs
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/plan">
-                                    Plan
-                                </Link>
-                            </li>
-                        </Fragment> */}
+          <li className="nav-item">
+            <Link className="nav-link" to="/">
+              Plan
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    auth: state.auth
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    actions: bindActionCreators({ authorize }, dispatch)
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Nav);
+export default Nav;

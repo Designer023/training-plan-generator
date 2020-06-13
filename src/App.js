@@ -9,6 +9,7 @@ import Plan from "./components/Plan";
 function App(props) {
   return (
     <div className="bg-light">
+      <Nav />
       <div className="p-0 rounded border m-3">
         <Switch>
           <Route path="/" exact component={Plan} />
