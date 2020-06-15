@@ -259,8 +259,6 @@ const Plan = ({ plan, generatePlan }: PlanTypes) => {
 
     return (
         <div className="bg-primary rounded-top" >
-            <h1 className="text-center text-light py-3 h3 mb-0">Training plan</h1>
-
             <PlanRender plan={plan} generatePlan={generatePlan} />
         </div>
     );
