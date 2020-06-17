@@ -6,73 +6,19 @@ import get from "lodash/get";
 import set from "lodash/set";
 import moment from "moment";
 
-import DatePicker from "./date-picker";
+import DatePicker from "./fields/date-picker";
+import Input from "./fields/input";
+import Select from "./fields/select";
 
-const DISTANCES = [
-  {
-    display: "5km",
-    value: 5000
-  },
-  {
-    display: "10km",
-    value: 10000
-  },
-  {
-    display: "15km",
-    value: 15000
-  },
-  {
-    display: "20km",
-    value: 20000
-  },
-  {
-    display: "Half Marathon",
-    value: 21097.5
-  },
-  {
-    display: "Metric Marathon (26.2km)",
-    value: 262000
-  },
-  {
-    display: "30km",
-    value: 30000
-  },
-  {
-    display: "Marathon",
-    value: 42195
-  },
-  {
-    display: "Ultra - 50km",
-    value: 50000
-  },
-  {
-    display: "Ultra - 60km",
-    value: 60000
-  },
-  {
-    display: "Ultra - 50mi",
-    value: 80467.2
-  },
-  {
-    display: "Ultra - 100km",
-    value: 100000
-  },
-  {
-    display: "Ultra - 80mi",
-    value: 128748
-  },
-  {
-    display: "Ultra - 100mi",
-    value: 160934
-  }
-];
+import { DISTANCES } from "../../../constants";
+import { required, maxWeeks52, minWeeks6 } from "../../../validators";
 
 const USER_CRITERIA = {
   PLAN_LENGTH: 23, // WEEKS
   PLAN_TAIL_OFF_LENGTH: 3,
   PLAN_RECOVER_WEEK_EVERY: 4,
-  PLAN_START_DISTANCE: 5000,
-  PLAN_END_DISTANCE: DISTANCES[0].value, // m
+  PLAN_START_DISTANCE: DISTANCES[0].value,
+  PLAN_END_DISTANCE: DISTANCES[5].value, // m
   PLAN_START_DATE: new Date(2020, 0, 6).toISOString(),
   USER_MAX_HR: 185,
   USER_PACES: {
@@ -81,25 +27,6 @@ const USER_CRITERIA = {
     STAMINA: 6.0
   }
 };
-
-const required = value => (value ? undefined : "Required");
-const minWeeks6 = value =>
-  value < 6 ? "Your plan must be longer than 6 weeks" : undefined;
-const maxWeeks52 = value =>
-  value > 52 ? "Your plan must be shorter than a year!" : undefined;
-
-const renderField = ({ input, label, type, meta: { touched, error } }) => (
-  <div className="form-group">
-    <label className="">{label}</label>
-    <input
-      className="form-control"
-      {...input}
-      placeholder={label}
-      type={type}
-    />
-    {touched && error && <div className="alert alert-danger mt-1">{error}</div>}
-  </div>
-);
 
 let UserSpecForm = props => {
   const {
@@ -115,7 +42,7 @@ let UserSpecForm = props => {
   const { t, i18n } = useTranslation();
 
   const startDistance = useSelector(state =>
-    get(state, "form.userSpec.values.startDistance", 21000)
+    get(state, "form.userSpec.values.startDistance")
   );
   const endDistance = useSelector(state =>
     get(state, "form.userSpec.values.endDistance")
@@ -128,9 +55,19 @@ let UserSpecForm = props => {
     get(state, "form.userSpec.values.endDate", null)
   );
 
+  const taperLength = useSelector(state =>
+    get(state, "form.userSpec.values.taperLength")
+  );
+
+  const recoveryPeriod = useSelector(state =>
+    get(state, "form.userSpec.values.recoveryPeriod")
+  );
+
+  const maxHR = useSelector(state => get(state, "form.userSpec.values.maxHR"));
+
   const startDate = moment(planEndDate)
-    .startOf("week")
-    .subtract(planLength, "week");
+    .subtract(planLength, "week")
+    .startOf("isoWeek");
   const startDateFormatted = startDate.format("MMM D YYYY");
   const daysIntoPlan = startDate.diff(moment().startOf("day"), "days");
 
@@ -158,7 +95,7 @@ let UserSpecForm = props => {
         <div className="col">
           <Field
             name="planLength"
-            component={renderField}
+            component={Input}
             type="number"
             placeholder="Plan Length"
             className="form-control"
@@ -174,28 +111,92 @@ let UserSpecForm = props => {
       <hr />
       <div className="form-row">
         <div className="col col-md-6">
-          <div className="form-group">
-            <label htmlFor="endDistance">
-              {t("form.targetDistance.label", "Target distance")}
-            </label>
-            <Field
-              name="endDistance"
-              component="select"
-              className="form-control"
-            >
-              {DISTANCES.map(d => {
-                return (
-                  <option key={d.value} value={d.value}>
-                    {d.display}
-                  </option>
-                );
-              })}
-            </Field>
-            <small className="form-text text-dark">
-              {t("form.targetDistance.helper")}
-            </small>
-          </div>
+          <Field
+            name="startDistance"
+            component={Select}
+            options={DISTANCES}
+            validate={[required]}
+            label={t("form.startDistance.label")}
+            helper={t("form.startDistance.helper")}
+          />
         </div>
+
+        <div className="col col-md-6">
+          <Field
+            name="endDistance"
+            component={Select}
+            options={DISTANCES}
+            validate={[required]}
+            label={t("form.targetDistance.label")}
+            helper={t("form.targetDistance.helper")}
+          />
+        </div>
+      </div>
+      <hr />
+
+      <div className="form-row">
+        <div className="col col-md-6">
+          <Field
+            name="taperLength"
+            component={Select}
+            options={[
+              { display: "1 Week", value: 1 },
+              { display: "2 Weeks", value: 2 },
+              { display: "3 Weeks", value: 3 }
+            ]}
+            validate={[required]}
+            label={t("form.taperLength.label")}
+            helper={t("form.taperLength.helper")}
+          />
+        </div>
+
+        <div className="col col-md-6">
+          <Field
+            name="recoveryPeriod"
+            component={Select}
+            options={[
+              { display: "4 Weeks", value: 4 },
+              { display: "6 Weeks", value: 6 },
+              { display: "8 Weeks", value: 8 }
+            ]}
+            validate={[required]}
+            label={t("form.recoveryPeriod.label")}
+            helper={t("form.recoveryPeriod.helper")}
+          />
+        </div>
+      </div>
+      <hr />
+
+      <div className="form-row">
+        <div className="col">
+          <Field
+            name="maxHR"
+            component={Input}
+            type="number"
+            placeholder={t("form.maxHR.placeholder")}
+            className="form-control"
+            validate={[required]}
+            label={t("form.maxHR.label")}
+          />
+          <small className="form-text text-dark">
+            {t("form.maxHR.helper")}
+          </small>
+        </div>
+        {/* </div>
+         <div className="col">
+          <Field
+            name="maxHR"
+            component={Input}
+            type="number"
+            placeholder="Plan Length"
+            className="form-control"
+            validate={[required]}
+            label={t("form.planLength")}
+          />
+          <small className="form-text text-dark">
+            The number of weeks the plan is running for
+          </small>
+        </div> */}
       </div>
 
       <hr />
@@ -210,7 +211,7 @@ let UserSpecForm = props => {
         >
           {daysIntoPlan >= 0
             ? "Your plan will start on "
-            : "The plan will start in the past: "}{" "}
+            : "Your plan has already started on "}{" "}
           {startDateFormatted}
         </div>
       ) : null}
@@ -230,8 +231,21 @@ let UserSpecForm = props => {
           );
           userSpec = set(userSpec, "PLAN_END_DISTANCE", parseInt(endDistance));
           userSpec = set(userSpec, "PLAN_LENGTH", parseInt(planLength));
-
           userSpec = set(userSpec, "PLAN_START_DATE", startDate.toISOString());
+
+          userSpec = set(
+            userSpec,
+            "PLAN_TAIL_OFF_LENGTH",
+            parseInt(taperLength)
+          );
+
+          userSpec = set(
+            userSpec,
+            "PLAN_RECOVER_WEEK_EVERY",
+            parseInt(recoveryPeriod)
+          );
+
+          userSpec = set(userSpec, "USER_MAX_HR", parseInt(maxHR));
 
           handleSubmit(userSpec);
         }}
@@ -242,34 +256,20 @@ let UserSpecForm = props => {
   );
 };
 
-const mapStateToProps = state => {
-  // console.log(state.form.userSpec)
-  return {
-    //initialValues: state.form.userSpec
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    // actions: bindActionCreators({ getAthleteData, getAthleteStats, getActivities }, dispatch)
-  };
-};
-
-UserSpecForm = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UserSpecForm);
-
 const UserSpecReduxForm = reduxForm({
   // a unique name for the form
   form: "userSpec",
   enableReinitialize: true,
   initialValues: {
-    endDistance: 21097.5,
+    startDistance: DISTANCES[3].value, // 5km
+    endDistance: DISTANCES[5].value, // HM
     endDate: moment()
       .endOf("week")
       .add(12, "week"),
-    planLength: 12
+    planLength: 12,
+    taperLength: 1,
+    recoveryPeriod: 4,
+    maxHR: 175
   }
 })(UserSpecForm);
 
