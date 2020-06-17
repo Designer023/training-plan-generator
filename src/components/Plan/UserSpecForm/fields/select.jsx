@@ -1,22 +1,19 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Field } from "redux-form";
-import { compose } from "redux";
 
 const Select = ({
   options,
   helper,
   input,
   label,
-  name,
-  type,
   meta: { touched, error }
 }) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <div className="form-group">
-      <label htmlFor={input.name}>{label}</label>
+      <label htmlFor={input.name}>{t(label)}</label>
       <Field name={input.name} component="select" className="form-control">
         {options.map(d => {
           return (
@@ -26,7 +23,7 @@ const Select = ({
           );
         })}
       </Field>
-      <small className="form-text text-dark">{helper}</small>
+      <small className="form-text text-muted">{t(helper)}</small>
     </div>
   );
 };
