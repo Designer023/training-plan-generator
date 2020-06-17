@@ -11,6 +11,23 @@ const resources = {
         targetDistance: {
           label: "Target distance",
           helper: "The distance of your final target"
+        },
+        startDistance: {
+          label: "Starting distance",
+          helper: "How far do you run now?"
+        },
+        taperLength: {
+          label: "Taper weeks",
+          helper:
+            "How many weeks before the event do you want to start 'saving' your legs!"
+        },
+        recoveryPeriod: {
+          label: "Recovery week every...",
+          helper: "How often do you want a recovery week (less distance)."
+        },
+        maxHR: {
+          label: "What is your maximum HR",
+          helper: "This derermines how hard you push!"
         }
       },
       date: {
