@@ -22,7 +22,7 @@ import {
 } from "../../hooks";
 
 const FormColumnGroup = ({ children }) => (
-  <Col>
+  <Col xs="12" sm="12" md="6" lg="3">
     <Form.Group>{children}</Form.Group>
   </Col>
 );
@@ -76,10 +76,7 @@ const UserSpecForm = props => {
             The number of weeks the plan is running for
           </Form.Text>
         </FormColumnGroup>
-      </Form.Row>
 
-      <hr />
-      <Form.Row>
         <FormColumnGroup>
           <Field
             name="startDistance"
