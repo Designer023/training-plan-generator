@@ -105,8 +105,8 @@ const Plan = ({ plan, generatePlan }: PlanTypes) => {
         <Col>
           <H1 className="text-center mt-4 mb-3">Training plan</H1>
           <Alert className="mb-1" color="danger" uncontrolled>
-            Undertake training plan at your own risk. Consult your doctor if you
-            are unsure. I am not a doctor or PT!
+            Undertake a training plan at your own risk. Consult your doctor if
+            you are unsure. I am not a doctor or PT!
           </Alert>
         </Col>
       </Row>

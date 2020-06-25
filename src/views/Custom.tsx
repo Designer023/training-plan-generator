@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Container, Row, Col, H1 } from "@bootstrap-styled/v4";
+import { Container, Row, Col, H1, Alert } from "@bootstrap-styled/v4";
 
 import { WeekPlan, UserSpec } from "../types";
 
@@ -38,7 +38,11 @@ const Plan = ({ plan, generatePlan }: PlanTypes) => {
     <Container>
       <Row>
         <Col>
-          <H1>Training plan</H1>
+          <H1 className="text-center mt-4 mb-3">Create your own plan</H1>
+          <Alert className="mb-1" color="danger" uncontrolled>
+            Undertake a training plan at your own risk. Consult your doctor if
+            you are unsure. I am not a doctor or PT!
+          </Alert>
         </Col>
       </Row>
       <Row>

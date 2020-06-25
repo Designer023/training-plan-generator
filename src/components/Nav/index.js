@@ -7,7 +7,8 @@ import {
   NavLink,
   NavDropdown,
   DropdownToggle,
-  DropdownMenu
+  DropdownMenu,
+  DropdownItem
 } from "@bootstrap-styled/v4";
 
 import { Link } from "react-router-dom";
@@ -17,7 +18,7 @@ const NavMenu = () => {
   return (
     <Nav inline={true} className=" navbar-dark bg-dark">
       <NavItem>
-        <NavbarBrand tag={A} to="/">
+        <NavbarBrand className="text-light" tag={Link} to="/">
           Training plan generator
         </NavbarBrand>
       </NavItem>
@@ -27,9 +28,11 @@ const NavMenu = () => {
           Plans
         </DropdownToggle>
         <DropdownMenu>
-          <NavItem>
-            <NavLink tag={Link}>Plan</NavLink>
-          </NavItem>
+          <DropdownItem>
+            <NavLink tag={Link} to={"/"}>
+              Plan
+            </NavLink>
+          </DropdownItem>
         </DropdownMenu>
       </NavDropdown>
     </Nav>
