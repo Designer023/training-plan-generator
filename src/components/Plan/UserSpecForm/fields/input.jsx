@@ -1,16 +1,17 @@
 import React from "react";
+import { Alert, Label, Input, InputGroup } from "@bootstrap-styled/v4";
 
-const Input = ({ input, label, type, meta: { touched, error } }) => (
-  <div className="form-group">
-    {label && <label className="">{label}</label>}
-    <input
+const ReduxInput = ({ input, label, type, meta: { touched, error } }) => (
+  <>
+    {label && <Label className="">{label}</Label>}
+    <Input
       className="form-control"
       {...input}
       placeholder={label}
       type={type}
     />
-    {touched && error && <div className="alert alert-danger mt-1">{error}</div>}
-  </div>
+    {touched && error && <Alert color="error">{error}</Alert>}
+  </>
 );
 
-export default Input;
+export default ReduxInput;

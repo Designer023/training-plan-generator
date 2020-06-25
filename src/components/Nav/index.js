@@ -1,35 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
+import {
+  A,
+  Nav,
+  NavbarBrand,
+  NavItem,
+  NavLink,
+  NavbarToggler,
+  NavDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  Button
+} from "@bootstrap-styled/v4";
 
 import { Link } from "react-router-dom";
 
-const Nav = () => {
+const NavMenu = () => {
+  const [isOpen, setOpen] = useState(false);
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a className="navbar-brand" href="/">
-        Training plan generator
-      </a>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon" />
-      </button>
-      <div className="collapse navbar-collapse" id="navbarNav">
-        <ul className="navbar-nav">
-          <li className="nav-item">
-            <Link className="nav-link" to="/">
-              Plan
-            </Link>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <Nav inline={true} className=" navbar-dark bg-dark">
+      <NavItem>
+        <NavbarBrand tag={A} to="/">
+          Training plan generator
+        </NavbarBrand>
+      </NavItem>
+
+      <NavDropdown isOpen={isOpen} toggle={() => setOpen(!isOpen)}>
+        <DropdownToggle caret nav>
+          Plans
+        </DropdownToggle>
+        <DropdownMenu>
+          <NavItem>
+            <NavLink tag={Link}>Plan</NavLink>
+          </NavItem>
+        </DropdownMenu>
+      </NavDropdown>
+    </Nav>
   );
 };
 
-export default Nav;
+export default NavMenu;

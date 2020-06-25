@@ -2,6 +2,8 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Field } from "redux-form";
 
+import { FormGroup, Label, FormText } from "@bootstrap-styled/v4";
+
 const Select = ({
   options,
   helper,
@@ -12,8 +14,8 @@ const Select = ({
   const { t } = useTranslation();
 
   return (
-    <div className="form-group">
-      <label htmlFor={input.name}>{t(label)}</label>
+    <FormGroup>
+      <Label htmlFor={input.name}>{t(label)}</Label>
       <Field name={input.name} component="select" className="form-control">
         {options.map(d => {
           return (
@@ -23,8 +25,8 @@ const Select = ({
           );
         })}
       </Field>
-      <small className="form-text text-muted">{t(helper)}</small>
-    </div>
+      <FormText color="muted">{t(helper)}</FormText>
+    </FormGroup>
   );
 };
 

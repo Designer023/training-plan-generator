@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "checkJs": false,
     "skipLibCheck": true,
@@ -22,17 +18,10 @@
     "alwaysStrict": true,
     "noUnusedLocals": true,
     "noImplicitReturns": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "noImplicitThis": true,
     "strictNullChecks": true
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts",
-    "src/sw-*.js",
-    "src/idb.js"
-  ]
+  "include": ["src"],
+  "exclude": ["node_modules", "**/*.spec.ts", "src/sw-*.js", "src/idb.js"]
 }

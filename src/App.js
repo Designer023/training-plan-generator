@@ -1,25 +1,21 @@
 import React from "react";
-import { connect } from "react-redux";
 
 import { Route, Switch } from "react-router";
 
 import Nav from "./components/Nav";
 import Plan from "./components/Plan";
+import Marathon from "./components/Plan/Marathon";
 
-function App(props) {
+function App() {
   return (
-    <div className="bg-light">
+    <div>
       <Nav />
-      <div className="p-0 rounded border m-3">
-        <Switch>
-          <Route path="/" exact component={Plan} />
-        </Switch>
-      </div>
+      <Switch>
+        <Route path="/" exact component={Plan} />
+        <Route path="/plans/marathon" exact component={Marathon} />
+      </Switch>
     </div>
   );
 }
 
-export default connect(
-  null,
-  null
-)(App);
+export default App;

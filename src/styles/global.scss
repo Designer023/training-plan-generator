@@ -5,10 +5,12 @@
 @import "~bootstrap/scss/mixins";
 
 // @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700');
-@import url('https://fonts.googleapis.com/css?family=Heebo&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Heebo&display=swap");
 
-
-html, body, #___gatsby, #___gatsby > div {
+html,
+body,
+#___gatsby,
+#___gatsby > div {
   height: 100%;
   min-height: 100%;
 }
@@ -54,33 +56,3 @@ html, body, #___gatsby, #___gatsby > div {
 @import "~bootstrap/scss/spinners";
 @import "~bootstrap/scss/utilities";
 @import "~bootstrap/scss/print";
-
-
-// .navbar-toggler-text {
-
-//   display: inline-flex;
-//   height: 1.5em;
-//   vertical-align: middle;
-//   justify-content: center;
-//   align-items: center;
-// }
-
-// pre {
-//   background: #f1f1f1;
-//   padding: 1em;
-// }
-
-// .grad-text,
-// h1, h2, h3,
-// .h1, .h2, .h3
-// {
-//   background: -webkit-linear-gradient(0deg,$primary,$secondary);
-//   -webkit-background-clip: text;
-//   -webkit-text-fill-color: transparent;
-// }
-
-// .bg-gradient {
-//   background: $primary; /* fallback for old browsers */
-//   background: -webkit-linear-gradient(to right, $primary, $secondary); /* Chrome 10-25, Safari 5.1-6 */
-//   background: linear-gradient(to right, $primary, $secondary); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-// }
