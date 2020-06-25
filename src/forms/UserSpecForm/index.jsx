@@ -15,12 +15,12 @@ import {
 
 import moment from "moment";
 
-import DatePicker from "./fields/date-picker";
-import Input from "./fields/input";
-import Select from "./fields/select";
+import DatePicker from "../fields/date-picker";
+import Input from "../fields/input";
+import Select from "../fields/select";
 
-import { DISTANCES } from "../../../constants";
-import { required, maxWeeks52, minWeeks6 } from "../../../validators";
+import { DISTANCES } from "../../constants";
+import { required, maxWeeks52, minWeeks6 } from "../validators";
 import {
   useUserCriteria,
   useDaysIntoPlan,

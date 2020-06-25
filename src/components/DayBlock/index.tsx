@@ -4,8 +4,8 @@ import { Row, Col, Badge, H5, H6 } from "@bootstrap-styled/v4";
 import get from "lodash/get";
 import moment from "moment";
 
-import { DayPlan } from "../../../trainingPlanGenerator/types";
-import { roundUp } from "../../../trainingPlanGenerator/utils";
+import { DayPlan } from "../../types";
+import { roundUp } from "../../utils/rounding";
 
 const getTheme = (name: string | undefined): string => {
   if (!name) return "primary";

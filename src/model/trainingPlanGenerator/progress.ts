@@ -10,9 +10,9 @@ import {
   ProgressType,
   CrossType,
   CrossRoutineType,
-} from "./types";
+} from "../../types";
 
-import { roundTo } from "./utils";
+import { roundTo } from "../../utils/rounding";
 import { getEffort } from "./constants/getEffort";
 
 import { HR } from "./constants/getEffort";

@@ -14,11 +14,11 @@ import queryString from "query-string";
 
 import moment from "moment";
 
-import { WeekPlan, UserSpec } from "./trainingPlanGenerator/types";
+import { WeekPlan, UserSpec } from "../types";
 
-import * as tp from "../../redux/reducers/trainingPlan";
+import * as tp from "../redux/reducers/trainingPlan";
 
-import WeekBlock from "./trainingPlanGenerator/Components/WeekBlock";
+import WeekBlock from "../components/WeekBlock";
 
 // Hook
 const useRouter = () => {

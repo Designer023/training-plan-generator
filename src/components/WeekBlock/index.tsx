@@ -2,9 +2,8 @@ import React from "react";
 import { Row, Col, Badge, H5, H4, H6, Hr, P } from "@bootstrap-styled/v4";
 
 import get from "lodash/get";
-// import moment from "moment";
 
-import { WeekPlan } from "../../../trainingPlanGenerator/types";
+import { WeekPlan } from "../../types";
 
 import DayBlock from "../DayBlock";
 

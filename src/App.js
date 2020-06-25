@@ -3,15 +3,15 @@ import React from "react";
 import { Route, Switch } from "react-router";
 
 import Nav from "./components/Nav";
-import Plan from "./components/Plan";
-import Marathon from "./components/Plan/Marathon";
+import Custom from "./views/Custom";
+import Marathon from "./views/Marathon";
 
 function App() {
   return (
     <div>
       <Nav />
       <Switch>
-        <Route path="/" exact component={Plan} />
+        <Route path="/" exact component={Custom} />
         <Route path="/plans/marathon" exact component={Marathon} />
       </Switch>
     </div>

@@ -2,12 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 import { Container, Row, Col, H1 } from "@bootstrap-styled/v4";
 
-import { WeekPlan, UserSpec } from "./trainingPlanGenerator/types";
+import { WeekPlan, UserSpec } from "../types";
 
-import WeekBlock from "./trainingPlanGenerator/Components/WeekBlock";
-import * as tp from "../../redux/reducers/trainingPlan";
+import WeekBlock from "../components/WeekBlock";
+import * as tp from "../redux/reducers/trainingPlan";
 
-import UserSpecForm from "./UserSpecForm";
+import UserSpecForm from "../forms/UserSpecForm";
 
 interface PlanRenderPropsType {
   plan: WeekPlan[];

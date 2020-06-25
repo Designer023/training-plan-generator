@@ -1,5 +1,5 @@
 import { createActions, handleAction } from "redux-actions";
-import createPlan from "../../components/Plan/trainingPlanGenerator";
+import createPlan from "../../model/trainingPlanGenerator";
 import get from "lodash/get";
 
 const defaultState = {
