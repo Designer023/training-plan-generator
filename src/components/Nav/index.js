@@ -5,12 +5,9 @@ import {
   NavbarBrand,
   NavItem,
   NavLink,
-  NavbarToggler,
   NavDropdown,
   DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Button
+  DropdownMenu
 } from "@bootstrap-styled/v4";
 
 import { Link } from "react-router-dom";

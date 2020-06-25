@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, Label, Input, InputGroup } from "@bootstrap-styled/v4";
+import { Alert, Label, Input } from "@bootstrap-styled/v4";
 
 const ReduxInput = ({ input, label, type, meta: { touched, error } }) => (
   <>
