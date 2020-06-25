@@ -3,10 +3,10 @@ import { applyMiddleware, compose, createStore } from "redux";
 import { routerMiddleware } from "connected-react-router";
 import thunk from "redux-thunk";
 
-import createRootReducer from "./redux/reducers";
+import createRootReducer from "./reducers";
 import { loadState, saveState } from "./localStorage";
-import authMiddleware from "./redux/middleware/auth";
-import appMiddleware from "./redux/middleware/app";
+import authMiddleware from "./middleware/auth";
+import appMiddleware from "./middleware/app";
 
 import throttle from "lodash/throttle";
 
@@ -43,7 +43,7 @@ function configureStore(preloadedState) {
   // Hot reloading
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
-    module.hot.accept("./redux/reducers", () => {
+    module.hot.accept("./reducers", () => {
       store.replaceReducer(createRootReducer(history));
     });
   }

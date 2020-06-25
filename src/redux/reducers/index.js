@@ -2,9 +2,6 @@ import { combineReducers } from "redux";
 import { connectRouter } from "connected-react-router";
 import { reducer as formReducer } from "redux-form";
 
-// import auth from "./auth";
-// import athlete from "./athlete";
-// import app from "./app";
 import trainingPlan from "./trainingPlan";
 import ui from "./ui";
 

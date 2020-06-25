@@ -10,7 +10,7 @@ import { createGlobalStyle } from "styled-components";
 
 import ReactDOM from "react-dom";
 import App from "./App";
-import { store, history } from "./configureStore";
+import { store, history } from "./redux/configureStore";
 import "./i18n";
 import { theme } from "./theme";
 
