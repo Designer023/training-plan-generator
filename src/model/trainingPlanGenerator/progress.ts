@@ -564,14 +564,23 @@ export class Progress {
     title: string = "Long",
     category: string = "long"
   ): DayPlan => {
+    const effortMatrix = getEffort("endurance");
+
+    const duration = distance / effortMatrix.pace;
     return {
-      day: this.createDay(date),
-      primaryActivity: {
-        type: "run",
-        category: category,
-        title: title,
-        details: this.createActivitySpec(userCriteria, distance, "endurance"),
-      },
+      date: date,
+      title: title,
+      category: category,
+      activity: "run",
+      description: "The long run",
+      time: duration,
+      distance: distance,
+      effortClass: "endurance",
+      effortRPE: [effortMatrix.lower_rpe, effortMatrix.upper_rpe],
+      effortHR: [
+        roundTo((userCriteria.USER_MAX_HR / 100) * effortMatrix.lower_hrp, 5),
+        roundTo((userCriteria.USER_MAX_HR / 100) * effortMatrix.upper_hrp, 5),
+      ],
     };
   };
 
@@ -581,16 +590,36 @@ export class Progress {
     progress: ProgressType,
     distance: number = 5000
   ): DayPlan => {
+    const effortMatrix = getEffort("speed");
+
+    const duration = distance / effortMatrix.pace;
+
     return {
-      day: this.createDay(date),
-      primaryActivity: {
-        type: "run",
-        category: "hit",
-        title: "Training day",
-        details: this.createActivitySpec(userCriteria, distance, "speed"),
-      },
-      extraActivities: [this.nextFlexRoutine()],
+      date: date,
+      title: "Training day",
+      category: "hit",
+      activity: "run",
+      description: "Focus on builing pace and stamina",
+      time: duration,
+      distance: distance,
+      effortClass: "speed",
+      effortRPE: [effortMatrix.lower_rpe, effortMatrix.upper_rpe],
+      effortHR: [
+        roundTo((userCriteria.USER_MAX_HR / 100) * effortMatrix.lower_hrp, 5),
+        roundTo((userCriteria.USER_MAX_HR / 100) * effortMatrix.upper_hrp, 5),
+      ],
     };
+
+    // return {
+    //   day: this.createDay(date),
+    //   primaryActivity: {
+    //     type: "run",
+    //     category: "hit",
+    //     title: "Training day",
+    //     details: this.createActivitySpec(userCriteria, distance, "speed"),
+    //   },
+    //   extraActivities: [this.nextFlexRoutine()],
+    // };
   };
 
   createBaseDay = (
@@ -598,19 +627,24 @@ export class Progress {
     userCriteria: UserSpec,
     progress: ProgressType
   ): DayPlan => {
+    const effortMatrix = getEffort("stamina");
+    const distance = this.nextBaseDistance();
+    const duration = distance / effortMatrix.pace;
+
     return {
-      day: this.createDay(date),
-      primaryActivity: {
-        type: "run",
-        category: "base",
-        title: "Base run",
-        details: this.createActivitySpec(
-          userCriteria,
-          this.nextBaseDistance(),
-          "stamina"
-        ),
-      },
-      extraActivities: [this.nextFlexRoutine(), this.nextCrossRoutine()],
+      date: date,
+      title: "Base run",
+      category: "base",
+      activity: "run",
+      description: "Building up some base distance on your legs",
+      time: duration,
+      distance: distance,
+      effortClass: "stamina",
+      effortRPE: [effortMatrix.lower_rpe, effortMatrix.upper_rpe],
+      effortHR: [
+        roundTo((userCriteria.USER_MAX_HR / 100) * effortMatrix.lower_hrp, 5),
+        roundTo((userCriteria.USER_MAX_HR / 100) * effortMatrix.upper_hrp, 5),
+      ],
     };
   };
 
@@ -620,23 +654,35 @@ export class Progress {
     progress: ProgressType,
     distance: number = 3000
   ): DayPlan => {
+    const effortMatrix = getEffort("endurance");
+    const duration = distance / effortMatrix.pace;
+
     return {
-      day: this.createDay(date),
-      primaryActivity: {
-        type: "run",
-        category: "easy",
-        title: "Short run",
-        details: this.createActivitySpec(userCriteria, distance, "endurance"),
-      },
-      extraActivities: [this.nextFlexRoutine(), this.nextCrossRoutine()],
+      date: date,
+      title: "Short run",
+      category: "easy",
+      activity: "run",
+      description: "Less is more... reovery and prep day",
+      time: duration,
+      distance: distance,
+      effortClass: "endurance",
+      effortRPE: [effortMatrix.lower_rpe, effortMatrix.upper_rpe],
+      effortHR: [
+        roundTo((userCriteria.USER_MAX_HR / 100) * effortMatrix.lower_hrp, 5),
+        roundTo((userCriteria.USER_MAX_HR / 100) * effortMatrix.upper_hrp, 5),
+      ],
     };
   };
 
   createRestDay = (date: Moment, progress: ProgressType): DayPlan => {
     return {
-      day: this.createDay(date),
-      primaryActivity: this.getRest(),
-      extraActivities: [this.nextCrossRoutine(), this.nextFlexRoutine()],
+      date: date,
+      activity: "rest",
+      category: "rest",
+      title: "😴 Rest day",
+      description: "Have a day off!",
+      time: null,
+      distance: null,
     };
   };
 
@@ -743,29 +789,52 @@ export class Progress {
       case "base":
         return this.createBaseDay(date, userCriteria, progress);
       case "parkrun":
+        const effortMatrix = getEffort("endurance");
+        const distance = 5000;
+        const duration = distance / effortMatrix.pace;
         return {
-          day: this.createDay(date),
-          primaryActivity: {
-            type: "run",
-            category: "parkrun",
-            title: "Parkrun",
-            details: this.createActivitySpec(userCriteria, 5000, "endurance"),
-          },
-          extraActivities: [this.nextFlexRoutine()],
+          date: date,
+          title: "🌳 Parkrun",
+          category: "parkrun",
+          activity: "run",
+          description: "It's not a race?",
+          time: duration,
+          distance: distance,
+          effortClass: "endurance",
+          effortRPE: [effortMatrix.lower_rpe, effortMatrix.upper_rpe],
+          effortHR: [
+            roundTo(
+              (userCriteria.USER_MAX_HR / 100) * effortMatrix.lower_hrp,
+              5
+            ),
+            roundTo(
+              (userCriteria.USER_MAX_HR / 100) * effortMatrix.upper_hrp,
+              5
+            ),
+          ],
         };
       case "easy":
         return this.createEasyDay(date, userCriteria, progress, 3000);
       case "rest_or_easy":
+        const em = getEffort("endurance");
+        const di = 3000;
+        const du = di / em.pace;
         return {
-          day: this.createDay(date),
-          primaryActivity: {
-            type: "run",
-            category: "easy",
-            title: "Easy",
-            details: this.createActivitySpec(userCriteria, 3000, "endurance"),
-          },
-          extraActivities: [this.nextFlexRoutine()],
+          date: date,
+          title: "Easy run",
+          category: "run",
+          activity: "run",
+          description: "Nice easy run",
+          time: du,
+          distance: di,
+          effortClass: "endurance",
+          effortRPE: [em.lower_rpe, em.upper_rpe],
+          effortHR: [
+            roundTo((userCriteria.USER_MAX_HR / 100) * em.lower_hrp, 5),
+            roundTo((userCriteria.USER_MAX_HR / 100) * em.upper_hrp, 5),
+          ],
         };
+
       default:
         // Always rest where possible!
         return this.createRestDay(date, progress);
@@ -796,7 +865,7 @@ export class Progress {
     week: number = 1,
     focus: string,
     weekStartDate: Moment
-  ): DayPlan[] => {
+  ): { days: DayPlan[]; distance: number; time: number } => {
     // Generate day data for week
     const days: DayPlan[] = [];
 
@@ -805,7 +874,14 @@ export class Progress {
       days.push(dayPlan);
     }
 
-    return days;
+    const distance = days.reduce((a, b) => a + (b.distance || 0), 0);
+    const time = days.reduce((a, b) => a + (b.time || 0), 0);
+
+    return {
+      days: days,
+      distance: distance,
+      time: time,
+    };
   };
 
   createWeek = (w: number, focus: string): WeekPlan => {
@@ -815,13 +891,19 @@ export class Progress {
       .startOf("day");
 
     // Generate day data for week
-    const days: DayPlan[] = this.createWeekDays(w, focus, newWeekStart);
+    const { days, distance, time } = this.createWeekDays(
+      w,
+      focus,
+      newWeekStart
+    );
 
     const weekPlan: WeekPlan = {
-      week: w,
+      number: w,
       focus: focus,
       startDate: newWeekStart,
       days: days,
+      weekDistance: distance,
+      weekTime: time,
     };
 
     return weekPlan;

@@ -62,7 +62,7 @@ const PlanRender = ({ plan }: PlanRenderPropsType) => {
     <Row className="mt-4">
       <Col>
         {plan.map((week) => {
-          return <WeekBlock week={week} key={`week_${week.week}`} />;
+          return <WeekBlock week={week} key={`week_${week.number}`} />;
         })}
       </Col>
     </Row>

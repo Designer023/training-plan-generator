@@ -38,7 +38,7 @@ const DayBlock = (props: DayProps) => {
 
   const today = moment();
 
-  const isToday = today.isSame(day.day.date, "day");
+  const isToday = today.isSame(day.date, "day");
 
   return (
     <Row className="border-bottom">
@@ -46,40 +46,26 @@ const DayBlock = (props: DayProps) => {
         <H5>
           <Badge
             className="text-uppercase"
-            color={getTheme(get(day, "primaryActivity.category", ""))}
+            color={getTheme(get(day, "category", ""))}
           >
-            {get(day, "primaryActivity.category", "")}
+            {get(day, "category", "")}
           </Badge>{" "}
-          {get(day, "primaryActivity.title", "-")}
+          {get(day, "title", "-")}
         </H5>
 
         <H6 className="text-muted text-uppercase">
-          {day.day.date.format("Do MMM 'YY")}
+          {day.date.format("Do MMM 'YY")}
         </H6>
       </Col>
       <Col xs={1}>{isToday ? <>✅</> : null}</Col>
       <Col xs={12} sm={12} className="py-2">
-        {get(day, "primaryActivity.details.details.spec.duration") ? (
-          <H6>
-            {`${roundUp(
-              get(day, "primaryActivity.details.details.spec.duration", 0) / 60,
-              5
-            )} mins`}{" "}
-            @ {get(day, "primaryActivity.details.details.effort.name", "")} pace
-            <span className="text-muted">
-              {" "}
-              (~
-              {Math.round(
-                get(
-                  day,
-                  "primaryActivity.details.details.spec.approx_distance",
-                  0
-                ) / 1000
-              )}
-              km)
-            </span>
-          </H6>
-        ) : null}
+        <H6>
+          {day.time ? `${roundUp(day.time / 60, 5)} mins @ ` : null}
+          {day.effortClass ? `${day.effortClass} pace` : null}
+          <span className="text-muted">
+            {day.distance ? ` (~ ${Math.round(day.distance / 1000)} km)` : null}
+          </span>
+        </H6>
       </Col>
     </Row>
   );

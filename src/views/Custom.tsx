@@ -21,7 +21,7 @@ const PlanRender = ({ plan }: PlanRenderPropsType) => {
     <Row className="mt-4">
       <Col>
         {plan.map((week) => {
-          return <WeekBlock week={week} key={week.week} />;
+          return <WeekBlock week={week} key={week.number} />;
         })}
       </Col>
     </Row>
@@ -34,6 +34,7 @@ interface PlanTypes {
 }
 
 const Plan = ({ plan, generatePlan }: PlanTypes) => {
+  console.log(plan);
   return (
     <Container>
       <Row>

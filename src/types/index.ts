@@ -59,15 +59,25 @@ export interface Details {
 }
 
 export interface DayPlan {
-  day: Day;
-  primaryActivity?: Activity;
-  extraActivities?: Activity[];
+  date: Moment;
+  title: string;
+  category: string;
+  activity: string;
+  description?: string;
+  time: number | null;
+  distance: number | null;
+  effortClass?: string;
+  effortRPE?: number[];
+  effortHR?: number[];
 }
 
 export interface WeekPlan {
-  week: number;
-  focus: string;
+  number: number;
   startDate: Moment;
+  focus: string;
+  weekDistance: number;
+  weekTime: number;
+  description?: string;
   days: DayPlan[];
 }
 
@@ -83,7 +93,11 @@ export interface ProgressType {
   updateWeekStats(distance?: number, time?: number): void;
   resetWeekStats(): void;
   createPlan(): WeekPlan[];
-  createWeekDays(week: number, focus: string, weekStartDate: Moment): DayPlan[];
+  createWeekDays(
+    week: number,
+    focus: string,
+    weekStartDate: Moment
+  ): { days: DayPlan[]; distance: number; time: number };
   createWeek(w: number, focus: string): WeekPlan;
   createDayPlan(
     weekStartDate: Moment,
