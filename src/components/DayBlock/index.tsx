@@ -42,32 +42,43 @@ const DayBlock = (props: DayProps) => {
 
   return (
     <Row className="border-bottom">
-      <Col xs={11} sm={11} className="py-2">
-        <H5>
-          <Badge
-            className="text-uppercase"
-            color={getTheme(get(day, "category", ""))}
-          >
-            {get(day, "category", "")}
-          </Badge>{" "}
-          {get(day, "title", "-")}
-        </H5>
+      <Col xs={11}>
+        <Row>
+          <Col xs={11} sm={11} className="py-2">
+            <H5>
+              <Badge
+                className="text-uppercase"
+                color={getTheme(get(day, "category", ""))}
+              >
+                {get(day, "category", "")}
+              </Badge>{" "}
+              {get(day, "title", "-")}
+            </H5>
 
-        <H6 className="text-muted text-uppercase">
-          {day.date.format("Do MMM 'YY")}
-        </H6>
+            <H6 className="text-muted text-uppercase">
+              {day.date.format("Do MMM 'YY")}
+            </H6>
+          </Col>
+          <Col xs={12} sm={12} className="py-2">
+            <H6>
+              {day.time ? `${roundUp(day.time / 60, 5)} mins @ ` : null}
+              {day.effortClass ? `${day.effortClass} pace` : null}
+              <span className="text-muted">
+                {day.distance
+                  ? ` (~ ${Math.round(day.distance / 1000)} km)`
+                  : null}
+              </span>
+            </H6>
+            <P>{day.description}</P>
+          </Col>
+        </Row>
       </Col>
-      <Col xs={1}>{isToday ? <>✅</> : null}</Col>
-      <Col xs={12} sm={12} className="py-2">
-        <H6>
-          {day.time ? `${roundUp(day.time / 60, 5)} mins @ ` : null}
-          {day.effortClass ? `${day.effortClass} pace` : null}
-          <span className="text-muted">
-            {day.distance ? ` (~ ${Math.round(day.distance / 1000)} km)` : null}
-          </span>
-        </H6>
-        <P>{day.description}</P>
-      </Col>
+      <Col
+        xs={1}
+        className={`${
+          isToday ? `bg-${getTheme(get(day, "category", ""))}` : ""
+        }`}
+      />
     </Row>
   );
 };
