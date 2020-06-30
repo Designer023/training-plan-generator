@@ -99,6 +99,7 @@ export interface ProgressType {
     weekStartDate: Moment
   ): { days: DayPlan[]; distance: number; time: number };
   createWeek(w: number, focus: string): WeekPlan;
+  getDescription(focus: string): string;
   createDayPlan(
     weekStartDate: Moment,
     dayOfWeek: number,

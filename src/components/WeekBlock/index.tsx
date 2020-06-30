@@ -28,23 +28,6 @@ const getTheme = (name: string | undefined): string => {
   return options[name] || "primary";
 };
 
-const weekBio = (category: string) => {
-  switch (category) {
-    case "regular":
-      return "Just a week of running, with a long run on the last day";
-    case "special":
-      return "Extra running just for you!";
-    case "recovery":
-      return "A little less to help you catch up!";
-    case "taper":
-      return "Less is more. The race is the more!";
-    case "race":
-      return "This is the week. You can do it 🙌";
-    default:
-      return "Just run!";
-  }
-};
-
 type WeekProps = {
   week: WeekPlan;
 };
@@ -71,7 +54,7 @@ const WeekBlock = (props: WeekProps) => {
             {Math.round(week.weekDistance / 1000)} km
           </P>
           <Hr />
-          <P>{weekBio(week.focus)}</P>
+          <P>{week.description}</P>
         </Col>
         <Col xs={12} md={9} className="bg-light text-dark border-right">
           {week.days.map((day) => (

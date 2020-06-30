@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Badge, H5, H6 } from "@bootstrap-styled/v4";
+import { Row, Col, Badge, H5, H6, P } from "@bootstrap-styled/v4";
 
 import get from "lodash/get";
 import moment from "moment";
@@ -66,6 +66,7 @@ const DayBlock = (props: DayProps) => {
             {day.distance ? ` (~ ${Math.round(day.distance / 1000)} km)` : null}
           </span>
         </H6>
+        <P>{day.description}</P>
       </Col>
     </Row>
   );

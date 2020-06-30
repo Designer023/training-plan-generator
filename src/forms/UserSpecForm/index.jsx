@@ -55,7 +55,7 @@ const UserSpecForm = props => {
         <Form className="bg-light p-2">
           <Row>
             <FormColumnGroup>
-              <Label htmlFor="startDistance">{t("form.endDate")}</Label>
+              <Label htmlFor="startDistance">Target date</Label>
               <Row>
                 <Col>
                   <Field
@@ -172,7 +172,7 @@ const UserSpecForm = props => {
 
           <Button
             color="primary"
-            className="btn btn-dark text-light text-uppercase font-weight-bold"
+            className="text-light text-uppercase font-weight-bold"
             type="submit"
             disabled={!valid || error || submitting}
             onClick={e => {

@@ -884,6 +884,23 @@ export class Progress {
     };
   };
 
+  getDescription = (focus: string): string => {
+    switch (focus) {
+      case "regular":
+        return "Just a week of running, with a long run on the last day";
+      case "special":
+        return "Extra running just for you!";
+      case "recovery":
+        return "A little less to help you catch up!";
+      case "taper":
+        return "Less is more. The race is the more!";
+      case "race":
+        return "This is the week. You can do it 🙌";
+      default:
+        return "Just run!";
+    }
+  };
+
   createWeek = (w: number, focus: string): WeekPlan => {
     const newWeekStart: Moment = this.planStartDate
       .clone()
@@ -904,6 +921,7 @@ export class Progress {
       days: days,
       weekDistance: distance,
       weekTime: time,
+      description: this.getDescription(focus),
     };
 
     return weekPlan;
