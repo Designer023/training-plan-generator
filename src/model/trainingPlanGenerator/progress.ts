@@ -599,7 +599,7 @@ export class Progress {
       title: "Training day",
       category: "hit",
       activity: "run",
-      description: "Focus on builing pace and stamina",
+      description: "Focus on building pace and stamina",
       time: duration,
       distance: distance,
       effortClass: "speed",
@@ -609,17 +609,6 @@ export class Progress {
         roundTo((userCriteria.USER_MAX_HR / 100) * effortMatrix.upper_hrp, 5),
       ],
     };
-
-    // return {
-    //   day: this.createDay(date),
-    //   primaryActivity: {
-    //     type: "run",
-    //     category: "hit",
-    //     title: "Training day",
-    //     details: this.createActivitySpec(userCriteria, distance, "speed"),
-    //   },
-    //   extraActivities: [this.nextFlexRoutine()],
-    // };
   };
 
   createBaseDay = (
